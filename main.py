@@ -52,6 +52,10 @@ class System:
         # если изоражение NSFW
         self.ephemeral = False
         self.nsfw_channel = False
+        # для openai/clip-vit-large-patch14 (проверка на NSFW)
+        self.model = None
+        self.processor = None
+        
 
     async def gen_request(self):
         url = "http://127.0.0.1:7860/sdapi/v1/txt2img"
@@ -409,13 +413,11 @@ class System:
         return result
 
     async def check_image(image: Image.Image, thresholds: dict = {'safe': 0.5, 'neutral': 0.5, 'nsfw': 0.5, 'violent': 0.7, 'shocking': 0.6}) -> dict | bool:
-        global model, processor
-
         try:
-            if model is None:
-                model = CLIPModel.from_pretrained('openai/clip-vit-large-patch14')
-            if processor is None:
-                processor = CLIPProcessor.from_pretrained('openai/clip-vit-large-patch14')
+            if self.model is None:
+                self.model = CLIPModel.from_pretrained('openai/clip-vit-large-patch14')
+            if self.processor is None:
+                self.processor = CLIPProcessor.from_pretrained('openai/clip-vit-large-patch14')
         except:
             return
 
