@@ -13,5 +13,5 @@ pip install langdetect pillow disnake transformers
 
 чтобы запустить web ui с API в папке `webui` найдите `webui-user.bat`, откройте в редакторе и строчку `set COMMANDLINE_ARGS` замените на
 ```
-set COMMANDLINE_ARGS=--api
+set COMMANDLINE_ARGS=--api --xformers
 ```
