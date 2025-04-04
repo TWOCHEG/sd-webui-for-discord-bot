@@ -3,7 +3,6 @@ from disnake.ext import commands
 from disnake import Locale, Localized
 import asyncio
 import os
-from modules.image.image_gen import ImageGen
 import aiohttp
 from PIL import Image, ImageFilter, ImageFont, ImageDraw, ImageChops
 import base64
@@ -35,7 +34,7 @@ class ImageGenLocal(commands.Cog):
         self.interrupt_id = 'generation_interrupt'
 
     @commands.cooldown(1, 60, commands.BucketType.user)
-    @ImageGen.image_generate.sub_command(
+    @commands.slash_command(
         name='automatic1111',
         description='AUTOMATIC1111/stable-diffusion-webui'
     )
